@@ -8,18 +8,78 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+//: Playground - noun: a place where people can play
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+import UIKit
+
+
+// enumeracion de la clase de Velocidad con un inicializador de Velocidad inicial con Integracion de las Distintas Velocidades
+
+enum Velocidades : Int {
+    
+    case Apagado = 0, VelocidadBaja = 20, VelocidadMedia = 50, VelocidadAlta = 120
+    
+    
+    init (velocidadInicial : Velocidades) {
+        
+        self = velocidadInicial
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
+
+// Asignacion de la clase Auto para determinar las diferentes velocidades y su respectivo Inicializador
+
+class Auto {
+    var velocidad: Velocidades
+    
+    init () {
+        
+        velocidad = Velocidades(velocidadInicial: .Apagado)
+        
+    }
+    
+    func cambioDeVelocidad () -> (actual: Int, velocidadEnCadena: String){
+        
+        var estadoVelocidad = ""
+        let actual = velocidad.rawValue
+        
+        switch velocidad {
+            
+        case .Apagado:
+            
+            velocidad = .VelocidadBaja
+            estadoVelocidad = "Apagado"
+            
+        case .VelocidadBaja:
+            
+            velocidad = .VelocidadBaja
+            estadoVelocidad = "VelocidadBaja"
+            
+        case .VelocidadMedia:
+            
+            velocidad = .VelocidadMedia
+            estadoVelocidad = "VelocidadMedia"
+            
+        case .VelocidadAlta:
+            
+            velocidad = .VelocidadAlta
+            estadoVelocidad = "VelocidadAlta"
+            
+        }
+        return (actual, estadoVelocidad)
+    }
+}
+
+// Impresion en consola del recorrido de las velocidades del 1 al 20. Cada numero tiene asignado un valor y su velocidad determinada
+
+let automovil = Auto ()
+
+for a in 1...20 {
+    
+    let resultados = automovil.cambioDeVelocidad ()
+    
+    print ("\(a)", "\(resultados.actual)", "\(resultados.velocidadEnCadena)" )
+    
+}
+
 
